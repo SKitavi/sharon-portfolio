@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFF9F4">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sharon Kitavi · Model card for a human">
+<meta property="og:description" content="AI Engineer, HCI, AI Safety. I build data and AI systems and study when people should trust them.">
+<meta property="og:image" content="assets/sharon-mono.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232A1B38'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='28' font-weight='700' text-anchor='middle' fill='%23CDBDF3'%3ESK%3C/text%3E%3C/svg%3E">
+<title>Sharon Kitavi Model Card</title>
+<meta name="description" content="Model card for a human: Sharon Kitavi, AI Engineer, HCI, AI Safety. MS Engineering AI student at Carnegie Mellon University Africa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one long page that reads like a model card written for humans. Each section has a
+   small technical label above a plain-English heading. Navigation is a hidden "Contents" drawer
+   opened from the top strip or a left-edge tab, with the active section highlighted.
+   Results live on a desk as sticky notes; speaking is a playlist of tracks.
+   Palette: cream paper, lilac, blush, butter, deep plum ink. Light only, by design. */
+:root {
+  --cream: #FFF9F4;
+  --paper: #FFFFFF;
+  --ink: #2A1B38;        /* deep plum ink */
+  --soft: #7A6B86;       /* muted plum */
+  --line: #EFE4EE;
+  --lilac: #CDBDF3;
+  --lavender: #F1EBFC;
+  --blush: #F9DCE5;
+  --rose: #E792B0;       /* the pop */
+  --violet: #6A4FC4;     /* links + numbers */
+  --butter: #FFF0C9;
+  --mint: #DDF0E3;
+  --sage: #7FA48A;       /* evidence: strong */
+  --amber: #D9A25C;      /* evidence: medium */
+  --mist: #C7BACB;       /* evidence: on request */
+
+  --head: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --sans: "Figtree", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --gutter: clamp(16px, 4.5vw, 48px);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--cream); color: var(--ink); font: 400 1.03rem/1.65 var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+p { margin: 0; }
+h1, h2, h3 { margin: 0; font-family: var(--head); font-weight: 600; font-variation-settings: "wdth" 86; letter-spacing: -0.025em; text-wrap: balance; }
+:focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 6px; }
+.wrap { width: 100%; max-width: 1120px; margin-inline: auto; padding-inline: var(--gutter); }
+.tech { font: 400 .78rem/1.4 var(--mono); color: var(--soft); letter-spacing: .02em; }
+.tech b { color: var(--violet); font-weight: 500; }
+.link { color: var(--violet); text-decoration: none; border-bottom: 1.5px solid var(--lilac); transition: border-color .3s; }
+.link:hover { border-color: var(--violet); }
+section { padding-block: clamp(36px, 5vw, 60px); scroll-margin-top: 40px; }
+.sec-head { display: grid; gap: 10px; margin-bottom: clamp(22px, 3.2vw, 36px); max-width: 720px; }
+.sec-head h2 { font-size: clamp(2rem, 4.6vw, 3.2rem); line-height: 1.02; }
+.sec-head h2 em { font-style: normal; color: var(--violet); }
+.sec-head .plain { color: var(--soft); font-size: 1.05rem; max-width: 56ch; }
+
+/* Top strip */
+.strip { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--cream) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.strip .in { max-width: none; margin: 0; padding: 10px clamp(12px, 2.5vw, 28px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 18px; }
+.strip .id { font: 500 .8rem/1.2 var(--mono); }
+.strip .id span { color: var(--soft); }
+.live { display: inline-flex; align-items: center; gap: 8px; }
+.pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--sage); flex: none; }
+@media (prefers-reduced-motion: no-preference) { .pulse { animation: pulse 2.4s ease-out infinite; } @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(127,164,138,.5); } 80%, 100% { box-shadow: 0 0 0 8px rgba(127,164,138,0); } } }
+.switch { display: inline-flex; align-items: center; gap: 10px; background: none; border: 0; padding: 4px 0; cursor: pointer; font: 600 .85rem/1 var(--sans); color: var(--ink); }
+.switch .track { width: 36px; height: 21px; border-radius: 999px; background: var(--lilac); position: relative; transition: background .3s; flex: none; }
+.switch .track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 15px; height: 15px; border-radius: 50%; background: var(--paper); box-shadow: 0 1px 2px rgba(42,27,56,.25); transition: transform .3s; }
+.switch[aria-pressed="true"] .track { background: var(--violet); }
+.switch[aria-pressed="true"] .track::after { transform: translateX(15px); }
+
+/* Contents drawer: hidden by default, opened from the strip button or the left-edge tab */
+.toc-btn { display: inline-flex; align-items: center; gap: 9px; background: var(--ink); color: var(--cream); border: 0; border-radius: 12px; padding: 9px 12px; cursor: pointer; font: 600 .86rem/1 var(--sans); max-width: 100%; box-shadow: 3px 3px 0 var(--rose); transition: transform .2s, box-shadow .2s; }
+.toc-btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--rose); }
+.toc-btn svg { width: 16px; height: 16px; flex: none; }
+.toc-btn .chev { width: 12px; height: 12px; transition: transform .3s; }
+.toc-btn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+.toc-btn .cur { font: 400 .74rem/1 var(--mono); color: var(--lilac); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 26ch; border-left: 1px solid rgba(255,255,255,.22); padding-left: 9px; }
+@media (max-width: 640px) { .strip .id { display: none; } }
+@media (max-width: 720px) { .strip .live { display: none; } .strip .in { flex-wrap: nowrap; } }
+@media (max-width: 480px) { .toc-btn .cur { display: none; } }
+@media (prefers-reduced-motion: no-preference) { .toc-btn.ping { animation: btnping 1.3s ease-out 3; } @keyframes btnping { 0% { box-shadow: 3px 3px 0 var(--rose), 0 0 0 0 rgba(106,79,196,.55); } 100% { box-shadow: 3px 3px 0 var(--rose), 0 0 0 14px rgba(106,79,196,0); } } }
+.nudge { position: absolute; top: calc(100% + 4px); left: clamp(12px, 2.5vw, 28px); z-index: 31; max-width: min(300px, calc(100vw - 32px)); background: var(--ink); color: var(--cream); font: 500 .84rem/1.4 var(--sans); padding: 10px 14px; border-radius: 14px; box-shadow: 0 14px 30px -14px rgba(42,27,56,.6); opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity .35s, transform .35s; }
+.nudge::before { content: ""; position: absolute; top: -6px; left: 22px; width: 12px; height: 12px; background: var(--ink); transform: rotate(45deg); border-radius: 2px; }
+.nudge b { color: var(--rose); font-weight: 600; }
+.nudge.on { opacity: 1; transform: none; }
+.toc-tab { position: fixed; left: 0; top: 50%; z-index: 24; transform: translateY(-50%) rotate(180deg); writing-mode: vertical-rl; background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-right: 0; border-radius: 12px 0 0 12px; padding: 14px 8px; font: 500 .74rem/1 var(--mono); letter-spacing: .06em; cursor: pointer; box-shadow: 0 10px 24px -16px rgba(42,27,56,.5); transition: padding .3s, background .3s; }
+.toc-tab:hover { padding-left: 12px; background: var(--lavender); }
+.toc-tab b { color: var(--violet); font-weight: 500; }
+@media (max-width: 899px) { .toc-tab { display: none; } }
+.toc { position: fixed; z-index: 40; top: 0; left: 0; bottom: 0; width: min(300px, 86vw); background: var(--paper); box-shadow: 20px 0 60px -30px rgba(42,27,56,.45); padding: calc(18px + env(safe-area-inset-top, 0px)) 18px calc(18px + env(safe-area-inset-bottom, 0px)); display: grid; grid-template-rows: auto auto 1fr auto; gap: 14px; transform: translateX(-104%); transition: transform .45s cubic-bezier(.2,.7,.2,1); overflow-y: auto; }
+.toc.open { transform: none; }
+@media (prefers-reduced-motion: reduce) { .toc { transition: none; } }
+.toc-top { display: flex; justify-content: space-between; align-items: center; }
+.toc-top h2 { font-size: 1.3rem; }
+.toc-close { width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--lavender); color: var(--ink); font: 400 1.1rem/1 var(--sans); cursor: pointer; }
+.toc-close:hover { background: var(--lilac); }
+.toc-progress { height: 3px; border-radius: 3px; background: var(--lavender); overflow: hidden; }
+.toc-progress i { display: block; height: 100%; width: calc(var(--p, 0) * 100%); background: linear-gradient(90deg, var(--lilac), var(--rose)); }
+.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; align-content: start; }
+.toc a { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); align-items: baseline; gap: 2px 6px; text-decoration: none; padding: 9px 10px; border-radius: 12px; transition: background .25s; }
+.toc a:hover { background: var(--cream); }
+.toc a .n { font: 500 .76rem/1 var(--mono); color: var(--soft); }
+.toc a b { font: 600 .98rem/1.25 var(--head); }
+.toc a small { grid-column: 2; font: 400 .7rem/1.3 var(--mono); color: var(--soft); }
+.toc a.on { background: var(--lavender); }
+.toc a.on .n { color: var(--violet); }
+.toc .legend-box { border-top: 1px solid var(--line); padding-top: 12px; display: grid; gap: 6px; }
+.toc .legend-box p { display: flex; align-items: center; gap: 8px; font-size: .8rem; color: var(--soft); }
+.scrim { position: fixed; inset: 0; z-index: 35; background: rgba(42,27,56,.25); opacity: 0; pointer-events: none; transition: opacity .35s; }
+.scrim.on { opacity: 1; pointer-events: auto; }
+@media (min-width: 1360px) { .scrim { display: none; } }
+
+/* Scroll progress ring: decorative only, not clickable */
+.ring { position: fixed; z-index: 22; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); width: 54px; height: 54px; border-radius: 50%; pointer-events: none; display: grid; place-items: center; background: conic-gradient(var(--rose) calc(var(--p, 0) * 360deg), var(--lavender) 0); box-shadow: 0 12px 26px -14px rgba(42,27,56,.55); }
+.ring::before { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: var(--ink); }
+.ring span { position: relative; font: 500 .7rem/1 var(--mono); color: var(--cream); font-variant-numeric: tabular-nums; }
+
+/* Evidence reveal: a scan sweeps the screen, chips pop in, sticky notes get stamped */
+.scan { position: fixed; inset: 0; z-index: 50; pointer-events: none; overflow: hidden; display: none; }
+.scan.run { display: block; }
+.scan::before { content: ""; position: absolute; left: 0; right: 0; top: -140px; height: 140px; background: linear-gradient(180deg, rgba(205,189,243,0), rgba(205,189,243,.35) 70%, rgba(231,146,176,.55)); border-bottom: 2px solid var(--violet); box-shadow: 0 6px 24px rgba(106,79,196,.35); }
+.scan.run::before { animation: sweep 1.2s cubic-bezier(.45,.05,.35,1) forwards; }
+@keyframes sweep { to { transform: translateY(calc(100vh + 140px)); } }
+.ev-anim .ev { animation: evpop .5s cubic-bezier(.2,1.3,.4,1) both; animation-delay: calc(.35s + var(--i, 0) * .09s); }
+@keyframes evpop { from { opacity: 0; transform: translateY(6px) scale(.9); } to { opacity: 1; transform: none; } }
+.ev-anim .ev .pip { animation: ping .8s ease-out both; animation-delay: calc(.45s + var(--i, 0) * .09s); }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(106,79,196,.55); } 100% { box-shadow: 0 0 0 9px rgba(106,79,196,0); } }
+.stamp { position: absolute; top: 62px; right: 14px; display: none; font: 600 .66rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; padding: 6px 8px; border: 2px solid currentColor; border-radius: 6px; transform: rotate(-12deg); background: rgba(255,255,255,.45); mix-blend-mode: multiply; }
+.stamp.strong { color: #4E7A5A; } .stamp.medium { color: #A9742F; } .stamp.weak { color: #8C7E91; }
+.show-ev .stamp { display: block; }
+.ev-anim .stamp { animation: stampin .45s cubic-bezier(.2,1.5,.4,1) both; animation-delay: calc(.55s + var(--i, 0) * .12s); }
+@keyframes stampin { 0% { opacity: 0; transform: rotate(-12deg) scale(2.2); } 60% { opacity: 1; transform: rotate(-12deg) scale(.92); } 100% { opacity: 1; transform: rotate(-12deg) scale(1); } }
+.show-ev .sticky { outline: 1.5px dashed rgba(106,79,196,.35); outline-offset: 5px; }
+.switch[aria-pressed="true"] .sw-label { color: var(--violet); }
+
+/* Hero */
+.hero { padding-block: clamp(20px, 3.5vw, 44px) clamp(48px, 7vw, 84px); position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; width: 60vw; max-width: 760px; aspect-ratio: 1; right: -12vw; top: -10vw; border-radius: 50%; background: radial-gradient(circle, var(--blush) 0%, rgba(249,220,229,0) 65%); pointer-events: none; }
+.hero::after { content: ""; position: absolute; width: 50vw; max-width: 640px; aspect-ratio: 1; left: -18vw; bottom: -22vw; border-radius: 50%; background: radial-gradient(circle, var(--lavender) 0%, rgba(241,235,252,0) 65%); pointer-events: none; }
+.hero .wrap { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(28px, 4vw, 56px); align-items: center; }
+.hero-copy { display: grid; gap: 18px; min-width: 0; }
+.id-row { display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap; }
+
+/* Headshot: a die-cut sticker inside a detection box */
+.detect { position: relative; width: clamp(104px, 12vw, 136px); flex: none; padding: 8px; margin: 0; isolation: isolate; }
+.detect .halo { position: absolute; z-index: -1; left: 14%; right: 14%; bottom: 8px; aspect-ratio: 1; border-radius: 46% 54% 50% 50% / 52% 48% 52% 48%; background: radial-gradient(circle at 40% 35%, var(--blush), var(--lilac)); transform: rotate(-8deg); }
+.detect img { display: block; width: 100%; height: auto; transform: rotate(-4deg);
+  filter: drop-shadow(2px 0 0 var(--paper)) drop-shadow(-2px 0 0 var(--paper)) drop-shadow(0 2px 0 var(--paper)) drop-shadow(0 -2px 0 var(--paper)) drop-shadow(1.5px 0 0 var(--violet)) drop-shadow(-1.5px 0 0 var(--violet)) drop-shadow(0 1.5px 0 var(--violet)) drop-shadow(0 -1.5px 0 var(--violet)) drop-shadow(0 10px 14px rgba(42,27,56,.22)); }
+.detect::before, .detect::after { content: ""; position: absolute; width: 18px; height: 18px; border: 2px solid var(--violet); }
+.detect::before { top: 0; left: 0; border-right: 0; border-bottom: 0; border-radius: 6px 0 0 0; }
+.detect::after { bottom: 0; right: 0; border-left: 0; border-top: 0; border-radius: 0 0 6px 0; }
+.detect figcaption { position: absolute; top: -10px; right: -6px; font: 500 .68rem/1 var(--mono); background: var(--violet); color: var(--paper); padding: 5px 7px; border-radius: 6px; white-space: nowrap; }
+@media (prefers-reduced-motion: no-preference) { .detect img { transition: transform .4s; } .detect:hover img { transform: rotate(2deg) scale(1.04); } }
+
+.id-tags { display: grid; gap: 8px; padding-bottom: 6px; }
+.badge { justify-self: start; font: 500 .78rem/1 var(--mono); background: var(--ink); color: var(--cream); border-radius: 999px; padding: 7px 12px; }
+.hero h1 { font-size: clamp(3rem, 7vw, 5.4rem); line-height: .9; letter-spacing: -0.045em; font-weight: 700; }
+.hero h1 span { display: block; color: var(--violet); }
+.tagline { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; }
+.tagline li { list-style: none; font: 600 .92rem/1 var(--head); padding: 9px 14px; border-radius: 999px; }
+.tagline li:nth-child(1) { background: var(--lilac); }
+.tagline li:nth-child(2) { background: var(--blush); }
+.tagline li:nth-child(3) { background: var(--butter); }
+.summary { color: var(--soft); font-size: 1.12rem; max-width: 46ch; }
+.summary b { color: var(--ink); font-weight: 600; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 20px; border-radius: 14px; background: var(--ink); color: var(--cream); text-decoration: none; font: 600 .95rem/1.2 var(--head); box-shadow: 4px 4px 0 var(--rose); transition: transform .25s, box-shadow .25s; }
+.btn:hover { transform: translate(-1px, -1px); box-shadow: 6px 6px 0 var(--rose); }
+.btn.alt { background: var(--paper); color: var(--ink); box-shadow: 4px 4px 0 var(--lilac); border: 1.5px solid var(--ink); padding: 11.5px 18px; }
+.btn.alt:hover { box-shadow: 6px 6px 0 var(--lilac); }
+.btn svg { width: 15px; height: 15px; flex: none; }
+/* Availability, written like a model's deployment status */
+.status { display: flex; align-items: flex-start; gap: 12px; justify-self: start; max-width: 100%; }
+.status .pulse { margin-top: 6px; }
+.status p { display: grid; gap: 3px; }
+.status strong { font: 600 .98rem/1.35 var(--head); }
+.profiles { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: .92rem; }
+.profiles a { color: var(--soft); text-decoration: none; }
+.profiles a:hover { color: var(--ink); }
+
+.figure-card { position: relative; background: var(--paper); border-radius: 26px; padding: 18px 18px 16px; box-shadow: 0 30px 60px -30px rgba(106,79,196,.35); transform: rotate(1.2deg); margin: 0; align-self: start; }
+.figure-card .plot { position: relative; aspect-ratio: 1; width: 100%; }
+.figure-card canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: crosshair; }
+.figure-card figcaption { font-size: .82rem; color: var(--soft); line-height: 1.5; margin-top: 8px; }
+.figure-card figcaption b { color: var(--ink); }
+.readout { position: absolute; top: 4px; left: 40px; font: 400 .74rem/1.4 var(--mono); color: var(--ink); background: var(--lavender); padding: 3px 8px; border-radius: 8px; pointer-events: none; }
+/* Narrow screens: results board moves up to sit right under the summary */
+@media (max-width: 900px) {
+  .hero .wrap { grid-template-columns: 1fr; gap: 18px; }
+  .hero-copy { display: contents; }
+  .id-row { order: 1; } .hero h1 { order: 2; } .summary { order: 3; } .board { order: 4; margin-block: 4px 6px; } .status { order: 5; } .actions { order: 6; } .profiles { order: 7; }
+}
+
+/* Ask the model */
+.ask { background: var(--ink); color: var(--cream); border-radius: clamp(24px, 4vw, 40px); margin-inline: clamp(8px, 2vw, 24px); }
+.ask .tech { color: #B9A8D6; }
+.ask .tech b { color: var(--rose); }
+.ask .sec-head .plain { color: #CBBFDB; }
+.ask .sec-head h2 em { color: var(--rose); }
+.chat { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(20px, 4vw, 48px); align-items: start; }
+.prompts { display: grid; gap: 10px; }
+.prompt { text-align: left; font: 500 .98rem/1.35 var(--sans); color: var(--cream); background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); border-radius: 14px; padding: 13px 16px; cursor: pointer; transition: background .25s, transform .25s; }
+.prompt:hover { background: rgba(255,255,255,.12); transform: translateX(3px); }
+.prompt[aria-pressed="true"] { background: var(--lilac); color: var(--ink); border-color: var(--lilac); }
+.window { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: 22px; padding: clamp(16px, 3vw, 26px); display: grid; gap: 14px; min-height: 300px; align-content: start; }
+.window .bar { display: flex; justify-content: space-between; gap: 10px; font: 400 .74rem/1 var(--mono); color: #B9A8D6; }
+.bubble { max-width: 92%; padding: 12px 16px; border-radius: 18px; line-height: 1.55; }
+.bubble.q { justify-self: end; background: var(--blush); color: var(--ink); border-bottom-right-radius: 6px; font-weight: 500; }
+.bubble.a { background: rgba(255,255,255,.1); border-bottom-left-radius: 6px; }
+.bubble.a .who { display: block; font: 500 .72rem/1 var(--mono); color: var(--lilac); margin-bottom: 6px; }
+.caret { display: inline-block; width: 7px; height: 1em; background: var(--rose); vertical-align: -2px; margin-left: 2px; }
+@media (prefers-reduced-motion: no-preference) { .caret { animation: blink 1s steps(2) infinite; } @keyframes blink { 50% { opacity: 0; } } }
+@media (max-width: 820px) { .chat { grid-template-columns: 1fr; } .prompts { grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; } }
+
+/* Results as sticky notes on a desk */
+/* Results board in the hero, so the numbers are visible on load */
+.board { background-color: #FBF3EC; background-image: radial-gradient(rgba(122,107,134,.18) 1px, transparent 1.2px); background-size: 20px 20px; border-radius: 28px; padding: clamp(16px, 2vw, 22px); display: grid; gap: 16px; min-width: 0; box-shadow: inset 0 0 0 1px var(--line); scroll-margin-top: 70px; }
+.board-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 6px 14px; }
+.board-head h2 { font-size: clamp(1.3rem, 2.2vw, 1.6rem); line-height: 1.1; margin-top: 4px; }
+.board-head h2 em { font-style: normal; color: var(--violet); }
+.legend { display: none; flex-wrap: wrap; gap: 6px 14px; }
+.show-ev .legend { display: flex; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; font: 400 .7rem/1 var(--mono); color: var(--soft); }
+.notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 16px; padding-top: 6px; }
+.sticky { position: relative; padding: 18px 16px 15px; display: grid; gap: 4px; align-content: start; border-radius: 3px 3px 18px 3px; box-shadow: 0 1px 0 rgba(42,27,56,.04), 0 14px 22px -16px rgba(42,27,56,.5); transform: rotate(var(--r, 0deg)); transition: transform .35s ease; }
+.sticky::before { content: ""; position: absolute; top: -9px; left: 50%; width: 64px; height: 18px; transform: translateX(-50%) rotate(var(--tape, -3deg)); background: rgba(205,189,243,.55); border-left: 2px dashed rgba(255,255,255,.6); border-right: 2px dashed rgba(255,255,255,.6); }
+.sticky:hover { transform: rotate(0deg) translateY(-4px); z-index: 2; }
+.sticky:nth-child(1) { background: var(--butter); --r: -2.2deg; }
+.sticky:nth-child(2) { background: var(--blush); --r: 1.6deg; --tape: 4deg; }
+.sticky:nth-child(3) { background: var(--lavender); --r: -1deg; }
+.sticky:nth-child(4) { background: var(--mint); --r: 2deg; --tape: -5deg; }
+.sticky .tech { color: var(--soft); font-size: .68rem; }
+.sticky b { font: 700 clamp(2.1rem, 3.4vw, 2.6rem)/.95 var(--head); font-variation-settings: "wdth" 80; letter-spacing: -0.04em; }
+.sticky h3 { font-size: .98rem; line-height: 1.2; }
+.sticky b.word { font-size: clamp(1.45rem, 2.3vw, 1.8rem); line-height: 1.02; letter-spacing: -0.025em; padding-block: 4px 2px; }
+.sticky b.word span { color: var(--violet); }
+.sticky p strong { color: var(--ink); font-weight: 600; }
+.sticky b.word small { display: block; margin-top: 5px; font: 600 .82rem/1.3 var(--head); letter-spacing: 0; color: var(--violet); }
+.sticky .ev { flex-wrap: wrap; }
+.sticky p { color: var(--soft); font-size: .8rem; line-height: 1.45; }
+.sticky .stamp { top: 12px; right: 8px; font-size: .58rem; padding: 4px 6px; }
+@media (max-width: 359px) { .notes { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .notes { gap: 18px 12px; } .sticky { padding: 16px 12px 13px; } .sticky b.word { font-size: 1.3rem; } }
+/* On load the notes drop onto the board one by one */
+@media (prefers-reduced-motion: no-preference) {
+  .sticky { animation: stick .7s cubic-bezier(.2,1.2,.4,1) backwards; animation-delay: calc(.25s + var(--n, 0) * .09s); }
+  .sticky:nth-child(2) { --n: 1; } .sticky:nth-child(3) { --n: 2; } .sticky:nth-child(4) { --n: 3; }
+  @keyframes stick { from { opacity: 0; transform: translateY(-24px) rotate(calc(var(--r, 0deg) * -4)) scale(1.08); } to { opacity: 1; transform: rotate(var(--r, 0deg)); } }
+}
+
+/* Evidence chips */
+.ev { display: none; align-items: center; gap: 6px; font: 400 .74rem/1.3 var(--mono); color: var(--soft); margin-top: 4px; }
+.ev a { color: var(--violet); text-decoration: none; border-bottom: 1px solid var(--lilac); }
+.show-ev .ev { display: flex; }
+.pip { width: 8px; height: 8px; border-radius: 50%; flex: none; display: inline-block; }
+.pip.strong { background: var(--sage); } .pip.medium { background: var(--amber); } .pip.weak { background: var(--mist); }
+
+/* Built for */
+.built { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(24px, 3.5vw, 48px); align-items: start; }
+.kv { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); margin: 0; }
+.kv dt, .kv dd { margin: 0; padding: 13px 0; border-bottom: 1px solid var(--line); }
+.kv dt { font: 400 .78rem/1.9 var(--mono); color: var(--soft); }
+.kv dd { min-width: 0; }
+.kv dd small { color: var(--soft); font-size: .9rem; }
+.uses { display: grid; align-content: start; }
+.uses > .tech { margin-bottom: 4px; }
+.use { display: grid; grid-template-columns: 10px minmax(0, 1fr); column-gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+.use i { width: 10px; height: 10px; border-radius: 3px; margin-top: 6px; }
+.use:nth-of-type(1) i { background: var(--violet); } .use:nth-of-type(2) i { background: var(--rose); } .use:nth-of-type(3) i { background: var(--amber); } .use:nth-of-type(4) i { background: var(--sage); }
+.use b { font: 600 .98rem/1.3 var(--head); display: block; }
+.use span { color: var(--soft); font-size: .86rem; }
+.oos { margin-top: 14px; padding: 12px 14px; border: 1.5px dashed var(--rose); border-radius: 14px; font-size: .92rem; }
+.oos .tech { display: block; margin-bottom: 2px; }
+.built .figure-card { max-width: 460px; width: 100%; justify-self: end; }
+.built .kv { grid-template-columns: 7.2rem minmax(0, 1fr); }
+.built .kv dt, .built .kv dd { padding-block: 11px; }
+@media (max-width: 1060px) { .built { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .built .figure-card { grid-column: 1 / -1; justify-self: center; width: 100%; } }
+@media (max-width: 720px) { .built { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .kv { grid-template-columns: 1fr; } .kv dt { border-bottom: 0; padding-bottom: 0; } .kv dd { padding-top: 2px; } }
+
+/* Learning path */
+.path { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr 1.35fr; gap: 18px; position: relative; }
+.path::before { content: ""; position: absolute; left: 0; right: 0; top: 18px; height: 2px; background: repeating-linear-gradient(90deg, var(--lilac) 0 8px, transparent 8px 14px); }
+.path > li { position: relative; padding-top: 44px; display: grid; gap: 6px; align-content: start; }
+.path > li::before { content: ""; position: absolute; top: 10px; left: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--cream); border: 4px solid var(--violet); }
+.path > li:last-child::before { border-color: var(--rose); background: var(--rose); }
+.path .yr { font: 500 .76rem/1 var(--mono); color: var(--violet); letter-spacing: .04em; }
+.path h3 { font-size: 1.15rem; }
+.path p { color: var(--soft); font-size: .92rem; }
+.finetune { margin-top: 10px; background: var(--paper); border-radius: 16px; padding: 14px 16px; display: grid; gap: 4px; box-shadow: 0 12px 30px -24px rgba(42,27,56,.5); border-left: 3px solid var(--rose); }
+.finetune .tech b { color: var(--rose); }
+.finetune strong { font: 600 1rem/1.3 var(--head); }
+@media (max-width: 820px) { .path { grid-template-columns: 1fr; row-gap: 28px; } .path::before { display: none; } }
+
+/* Deployments */
+.deploys { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.dep { background: var(--paper); border-radius: 22px; padding: 22px; display: grid; gap: 10px; align-content: start; box-shadow: 0 16px 40px -30px rgba(42,27,56,.5); transition: transform .3s; }
+.dep:hover { transform: translateY(-3px); }
+.dep .top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.tag { font: 500 .72rem/1 var(--mono); padding: 6px 10px; border-radius: 999px; }
+.tag.r { background: var(--lilac); } .tag.i { background: var(--blush); } .tag.c { background: var(--butter); } .tag.l { background: var(--mint); } .tag.s { background: var(--ink); color: var(--cream); }
+.dep .when { font: 400 .76rem/1 var(--mono); color: var(--soft); }
+.dep h3 { font-size: 1.12rem; line-height: 1.2; }
+.dep p { color: var(--soft); font-size: .93rem; }
+.dep-wide { grid-column: span 2; }
+.projects { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.projects li { display: grid; gap: 4px; align-content: start; padding: 14px 16px; border-radius: 16px; background: var(--lavender); }
+.projects li:nth-child(2) { background: var(--blush); }
+.projects b { font: 600 1rem/1.3 var(--head); }
+.projects p { font-size: .9rem; }
+.artifacts .new { font: 500 .66rem/1 var(--mono); background: var(--rose); color: var(--paper); padding: 4px 7px; border-radius: 999px; vertical-align: 3px; margin-left: 4px; letter-spacing: .04em; }
+@media (max-width: 1000px) { .deploys { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .dep-wide { grid-column: auto; } .projects { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .deploys { grid-template-columns: 1fr; } }
+
+/* Speaking: a playlist of tracks */
+.tracks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.track { display: grid; grid-template-columns: 2.4rem minmax(0, 1fr) minmax(0, 150px) auto; align-items: center; gap: 16px; background: var(--paper); border-radius: 18px; padding: 16px 20px; box-shadow: 0 12px 30px -26px rgba(42,27,56,.5); transition: transform .3s; }
+.track:hover { transform: translateX(4px); }
+.track .num { font: 500 .85rem/1 var(--mono); color: var(--violet); }
+.track h3 { font-size: 1.08rem; line-height: 1.25; }
+.track .sub { color: var(--soft); font-size: .9rem; }
+.wave { display: flex; align-items: center; gap: 3px; height: 28px; }
+.wave i { flex: 1; min-width: 2px; border-radius: 2px; background: var(--lilac); height: var(--h); }
+.track:nth-child(2n) .wave i { background: var(--blush); }
+.track.feature { background: var(--ink); color: var(--cream); }
+.track.feature .sub { color: #CBBFDB; }
+.track.feature .num { color: var(--rose); }
+.track.feature .wave i { background: var(--rose); }
+.role { font: 500 .72rem/1 var(--mono); padding: 6px 10px; border-radius: 999px; background: var(--lavender); color: var(--ink); white-space: nowrap; }
+.track.feature .role { background: var(--rose); }
+@media (prefers-reduced-motion: no-preference) { .track:hover .wave i { animation: eq .9s ease-in-out infinite alternate; } .track:hover .wave i:nth-child(odd) { animation-delay: .2s; } @keyframes eq { to { height: calc(var(--h) * .45); } } }
+@media (max-width: 720px) { .track { grid-template-columns: 2rem minmax(0, 1fr); } .wave { display: none; } .role { grid-column: 2; justify-self: start; } }
+
+/* Capabilities */
+.caps { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+.skillset { display: grid; gap: 18px; }
+.skillset h3 { font-size: 1rem; margin-bottom: 8px; }
+.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.chips li { font-size: .88rem; background: var(--lavender); border-radius: 999px; padding: 5px 12px; }
+.skillset > div:nth-child(2) .chips li { background: var(--blush); }
+.skillset > div:nth-child(3) .chips li { background: var(--butter); }
+.context { background: var(--paper); border-radius: 26px; padding: 26px; display: grid; gap: 14px; box-shadow: 0 20px 50px -34px rgba(106,79,196,.5); }
+.context h3 { font-size: 1.5rem; }
+.context p { color: var(--soft); }
+.meter { display: grid; gap: 8px; }
+.meter div { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 10px; align-items: center; font-size: .86rem; color: var(--soft); }
+.meter span.bar { height: 10px; border-radius: 6px; background: var(--lavender); overflow: hidden; }
+.meter span.bar i { display: block; height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--lilac), var(--rose)); width: var(--w); }
+@media (prefers-reduced-motion: no-preference) { @supports (animation-timeline: view()) { .meter span.bar i { animation: fill linear both; animation-timeline: view(); animation-range: entry 10% cover 40%; } @keyframes fill { from { width: 4%; } to { width: var(--w); } } } }
+.artifacts { margin: 30px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.artifacts li { list-style: none; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.artifacts h3 { font-size: 1.08rem; }
+.artifacts .when { font: 400 .76rem/1.9 var(--mono); color: var(--soft); }
+.artifacts p { grid-column: 1 / -1; color: var(--soft); font-size: .94rem; }
+@media (max-width: 820px) { .caps { grid-template-columns: 1fr; } }
+
+/* Behaviours & alignment: values on one side, the behaviour log on the other */
+.character { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+.character .col { display: grid; gap: 12px; }
+.values { display: grid; gap: 12px; }
+.value { border-radius: 22px; padding: 18px 22px; display: grid; gap: 4px; }
+.value:nth-child(1) { background: var(--lilac); } .value:nth-child(2) { background: var(--blush); } .value:nth-child(3) { background: var(--ink); color: var(--cream); }
+.value:nth-child(3) p { color: #CBBFDB; }
+.value h3 { font-size: 1.35rem; }
+.value p { color: var(--soft); font-size: .93rem; }
+.log { list-style: none; margin: 0; padding: 0; display: grid; }
+.log li { display: grid; gap: 4px; padding: 14px 0 14px 18px; border-bottom: 1px solid var(--line); position: relative; }
+.log li::before { content: ""; position: absolute; left: 0; top: 18px; bottom: 18px; width: 3px; border-radius: 3px; background: var(--c, var(--lilac)); }
+.log li:nth-child(2) { --c: var(--rose); } .log li:nth-child(3) { --c: var(--amber); } .log li:nth-child(4) { --c: var(--sage); }
+.log h3 { font-size: 1.05rem; }
+.log p { color: var(--soft); font-size: .92rem; }
+@media (max-width: 820px) { .character { grid-template-columns: 1fr; } }
+
+/* Contact */
+.contact { background: var(--ink); color: var(--cream); border-radius: clamp(24px, 4vw, 40px) clamp(24px, 4vw, 40px) 0 0; margin-inline: clamp(8px, 2vw, 24px); }
+.contact .tech { color: #B9A8D6; }
+.contact .tech b { color: var(--rose); }
+.contact h2 { font-size: clamp(2.6rem, 8vw, 6rem); line-height: .92; letter-spacing: -0.045em; font-weight: 700; }
+.contact h2 em { font-style: normal; color: var(--rose); }
+.prompt-line { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 28px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); border-radius: 18px; padding: 16px 18px; }
+.prompt-line .gt { font: 500 1rem/1 var(--mono); color: var(--rose); }
+.email { font: 600 clamp(1.05rem, 2.6vw, 1.5rem)/1.3 var(--head); user-select: all; overflow-wrap: anywhere; flex: 1; min-width: 0; }
+.copy { font: 600 .85rem/1 var(--sans); background: var(--lilac); color: var(--ink); border: 0; border-radius: 999px; padding: 10px 16px; cursor: pointer; }
+.contact .profiles { margin-top: 20px; }
+.contact .profiles a { color: #CBBFDB; }
+.contact .profiles a:hover { color: var(--cream); }
+.cite { margin-top: 36px; font: 400 .78rem/1.7 var(--mono); color: #9F8FB9; }
+.foot { background: var(--ink); color: #9F8FB9; margin-inline: clamp(8px, 2vw, 24px); padding: 0 var(--gutter) 28px; font: 400 .74rem/1.5 var(--mono); }
+.foot .wrap { padding: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy > * { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
+  .hero-copy > :nth-child(2) { animation-delay: .06s; } .hero-copy > :nth-child(3) { animation-delay: .12s; } .hero-copy > :nth-child(n+4) { animation-delay: .18s; }
+  @keyframes rise { from { opacity: .2; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @supports (animation-timeline: view()) {
+    .sec-head, .dep, .path > li, .value, .track, .context {
+      animation: settle linear both; animation-timeline: view(); animation-range: entry 0% entry 50%;
+    }
+    @keyframes settle { from { opacity: .2; translate: 0 22px; } to { opacity: 1; translate: 0 0; } }
+  }
+}
+</style>
+</head>
+<body>
+<div class="strip">
+  <div class="in">
+    <button class="toc-btn" id="tocBtn" type="button" data-toc-open aria-controls="toc" aria-expanded="false"><svg viewBox="0 0 16 16" aria-hidden="true"><g fill="currentColor"><circle cx="2.5" cy="3.5" r="1.3"/><circle cx="2.5" cy="8" r="1.3"/><circle cx="2.5" cy="12.5" r="1.3"/></g><path d="M6 3.5h8.5M6 8h8.5M6 12.5h8.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>Content<span class="cur" id="tocCur">00 Overview</span><svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></button>
+    <p class="id">model_card <span>/</span> sharon-kitavi <span>@ v2026.11</span></p>
+    <p class="tech live"><span class="pulse" aria-hidden="true"></span>Online &middot; Kigali <span id="clock">--:--</span></p>
+    <button class="switch" id="evSwitch" type="button" aria-pressed="false"><span class="track" aria-hidden="true"></span><span class="sw-label">Show evidence</span></button>
+  </div>
+  <p class="nudge" id="nudge" aria-hidden="true">New here? Use <b>Content</b> to move between all 9 sections.</p>
+</div>
+
+<button class="toc-tab" type="button" data-toc-open aria-controls="toc">Contents &middot; <b id="tabCur">00</b></button>
+<div class="scrim" id="scrim" aria-hidden="true"></div>
+<div class="ring" aria-hidden="true"><span id="ringPct">0%</span></div>
+<aside class="toc" id="toc" aria-label="Contents" inert>
+  <div class="toc-top"><h2>Contents</h2><button class="toc-close" type="button" id="tocClose" aria-label="Close contents">&times;</button></div>
+  <div class="toc-progress" aria-hidden="true"><i></i></div>
+  <ol>
+    <li><a href="#top" class="on"><span class="n">00</span><b>Overview &amp; results</b><small>model_card &middot; evaluation_results</small></a></li>
+    <li><a href="#ask"><span class="n">01</span><b>Ask the model</b><small>inference_playground</small></a></li>
+    <li><a href="#built"><span class="n">02</span><b>What I&rsquo;m built for</b><small>model_details</small></a></li>
+    <li><a href="#training"><span class="n">03</span><b>Where I learned</b><small>training_data</small></a></li>
+    <li><a href="#capabilities"><span class="n">04</span><b>What I&rsquo;m good at</b><small>capabilities</small></a></li>
+    <li><a href="#deploy"><span class="n">05</span><b>Where I&rsquo;ve been deployed</b><small>deployments</small></a></li>
+    <li><a href="#speaking"><span class="n">06</span><b>On the mic</b><small>voice_output</small></a></li>
+    <li><a href="#behaviours"><span class="n">07</span><b>How I work &amp; what I&rsquo;m aligned to</b><small>behaviours &middot; alignment</small></a></li>
+    <li><a href="#contact"><span class="n">08</span><b>Get in touch</b><small>query_the_model</small></a></li>
+  </ol>
+  <div class="legend-box" aria-label="Evidence strength key">
+    <p class="tech">evidence_strength</p>
+    <p><span class="pip strong"></span>Public &amp; checkable</p>
+    <p><span class="pip medium"></span>Public profile</p>
+    <p><span class="pip weak"></span>On request</p>
+  </div>
+</aside>
+
+<main>
+  <section class="hero" id="top" data-sec aria-labelledby="name">
+    <div class="wrap">
+      <div class="hero-copy">
+        <div class="id-row">
+          <figure class="detect">
+            <span class="halo" aria-hidden="true"></span>
+            <img src="assets/sharon-mono.png" width="520" height="529" alt="Sharon Kitavi smiling, in a blazer and collared shirt">
+            <figcaption>human &middot; 0.99</figcaption>
+          </figure>
+          <div class="id-tags">
+            <span class="badge">model card &middot; for a human</span>
+            <ul class="tagline"><li>AI Engineer</li><li>HCI</li><li>AI Safety</li></ul>
+          </div>
+        </div>
+        <h1 id="name">Sharon <span>Kitavi</span></h1>
+        <p class="summary">I build data and AI systems and study <b>when people should trust them</b>. Pursuing a Masters in Engineering Artificial Intelligence at CMU.</p>
+        <div class="status"><span class="pulse" aria-hidden="true"></span><p><span class="tech">status: <b>accepting new deployments</b></span><strong>Open to AI Engineering, Data and Research roles, or a collaboration.</strong></p></div>
+        <div class="actions">
+          <a class="btn" href="#ask">Ask the model</a>
+          <a class="btn alt" href="assets/Sharon_Kitavi_CV.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0L4.8 6.8M8 10l3.2-3.2M3 13.5h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Download CV</a>
+          <a class="link" href="#contact">Get in touch</a>
+        </div>
+        <nav class="profiles" aria-label="Profiles">
+          <a href="https://www.linkedin.com/in/sharonkitavi/" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+          <a href="https://github.com/SKitavi" target="_blank" rel="noopener">GitHub &nearr;</a>
+          <a href="https://medium.com/@sharonkmwikali" target="_blank" rel="noopener">Medium &nearr;</a>
+        </nav>
+      </div>
+      <div class="board" id="eval" aria-labelledby="eval-title">
+        <div class="board-head"><div><p class="tech"><b>evaluation_results</b> &middot; measured in the wild</p><h2 id="eval-title">Things I&rsquo;ve done that <em>worked.</em></h2></div><div class="legend" aria-label="Evidence key"><span><i class="pip strong"></i>public &amp; checkable</span><span><i class="pip medium"></i>public profile</span><span><i class="pip weak"></i>on request</span></div></div>
+        <div class="notes">
+        <article class="sticky"><p class="tech">research_to_release</p><b>~100</b><h3>Product tickets shipped</h3><p>At VettedAI, from user interviews and analytics to engineering and post-release tracking.</p><span class="ev"><span class="pip weak"></span>Reference on request</span></article>
+        <article class="sticky"><p class="tech">workflow_automation</p><b>40%</b><h3>Faster requisitions</h3><p>A PowerApps tool I led at Isuzu East Africa, used by 300+ staff.</p><span class="ev"><span class="pip weak"></span>Reference on request</span></article>
+        <article class="sticky"><p class="tech">multilingual_nlp &middot; hackathons</p><b class="word">Multilingual <span>NLP</span><small>for code-switched English &amp; Swahili</small></b><p>SautiNet reads Kenyan social media in both, even when people switch languages mid-sentence. SmartHive AI and AvaCertify placed at the <strong>Kenya Inter-University AI Hackathon</strong> and the <strong>African Blockchain Championship</strong>.</p><span class="ev"><span class="pip strong"></span><a href="https://github.com/SKitavi/sautiNet" target="_blank" rel="noopener">SautiNet repo &nearr;</a> <a href="https://github.com/SKitavi/Smarthive-ai" target="_blank" rel="noopener">SmartHive repo &nearr;</a></span></article>
+        <article class="sticky"><p class="tech">venture_building</p><b class="word">AWS <span>Cloudplexo</span></b><h3>Startup programme, as co-founder</h3><p>AvaCertify, certificate verification on Avalanche, raised early funding and earned a place in the AWS Cloudplexo startup programme.</p><span class="ev"><span class="pip medium"></span><a href="https://www.linkedin.com/in/sharonkitavi/" target="_blank" rel="noopener">LinkedIn &nearr;</a></span></article>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ask" id="ask" data-sec aria-labelledby="ask-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="tech"><b>&sect;01</b> &middot; inference_playground</p>
+        <h2 id="ask-title">Ask the model <em>anything.</em></h2>
+        <p class="plain">Not technical? Start here. Pick a question and Sharon answers in plain English.</p>
+      </div>
+      <div class="chat">
+        <div class="prompts" role="group" aria-label="Questions">
+          <button class="prompt" type="button" data-q="0" aria-pressed="true">Who is Sharon, in one line?</button>
+          <button class="prompt" type="button" data-q="1" aria-pressed="false">What is she researching?</button>
+          <button class="prompt" type="button" data-q="2" aria-pressed="false">What has she actually shipped?</button>
+          <button class="prompt" type="button" data-q="3" aria-pressed="false">Why would a team want her?</button>
+          <button class="prompt" type="button" data-q="4" aria-pressed="false">Is she fun to work with?</button>
+        </div>
+        <div class="window" aria-live="polite">
+          <div class="bar"><span>sharon-1 &middot; human</span><span>temperature: calm</span></div>
+          <p class="bubble q" id="chatQ">Who is Sharon, in one line?</p>
+          <p class="bubble a"><span class="who">sharon-1</span><span id="chatA">An AI engineer and researcher who builds data and AI systems and studies when people should trust them, now doing an MS in Engineering AI at Carnegie Mellon University Africa.</span><span class="caret" aria-hidden="true"></span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="built" data-sec aria-labelledby="built-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="tech"><b>&sect;02</b> &middot; model_details &amp; intended_use</p>
+        <h2 id="built-title">What I'm <em>built for.</em></h2>
+      </div>
+      <div class="built">
+        <dl class="kv">
+          <dt>Name</dt><dd>Sharon Mwikali Kitavi</dd>
+          <dt>Version</dt><dd>MS Engineering AI <small>&middot; Carnegie Mellon University Africa</small></dd>
+          <dt>Origin</dt><dd>Nairobi, Kenya <small>&rarr; Kigali, Rwanda</small></dd>
+          <dt>Architecture</dt><dd>Data &amp; AI core, human-centred interface, safety-aligned goals</dd>
+          <dt>Memberships</dt><dd>Africa Innovators Society &middot; ASICA</dd>
+          <dt>Languages</dt><dd>English, Swahili</dd>
+        </dl>
+        <div class="uses">
+          <p class="tech">intended_use</p>
+          <div class="use"><i aria-hidden="true"></i><div><b>Data &amp; AI engineering</b><span>Pipelines, NLP, agents, analytics</span></div></div>
+          <div class="use"><i aria-hidden="true"></i><div><b>AI evaluation</b><span>Testing AI against expert human judgement</span></div></div>
+          <div class="use"><i aria-hidden="true"></i><div><b>Human-AI interaction research</b><span>How people decide to rely on AI</span></div></div>
+          <div class="use"><i aria-hidden="true"></i><div><b>AI safety &amp; alignment</b><span>AI that stays honest and helpful</span></div></div>
+          <p class="oos"><span class="tech">out_of_scope</span>Being the loudest person in the room. I lead with calm.</p>
+        </div>
+        <figure class="figure-card">
+          <div class="plot">
+          <canvas id="reliability" role="img" aria-label="Reliability diagram drawn in dots: how often a model is right, plotted against how confident it says it is"></canvas>
+          <span class="readout" id="readout" hidden></span>
+          </div>
+          <figcaption><b>Fig. 1 &middot; What I study.</b> When an AI says it's 70% sure, is it right 70% of the time? The rings show perfect honesty; the dots show reality. Hover to compare.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="training" data-sec aria-labelledby="train-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="tech"><b>&sect;03</b> &middot; training_data</p>
+        <h2 id="train-title">Where I <em>learned.</em></h2>
+      </div>
+      <ol class="path">
+        <li><h3>BSc Computer Science</h3><p>Catholic University of Eastern Africa, Nairobi</p></li>
+        <li><h3>Data Science</h3><p>ALX Africa, 12 months &middot; IBM Research Africa Tech Talent</p></li>
+        <li>
+          <h3>MS Engineering AI</h3><p>Carnegie Mellon University Africa, supported by the Government of Rwanda</p>
+          <div class="finetune"><span class="tech"><b>&#8627; fine-tuning</b> &middot; AI safety</span><strong>ASICA &amp; BlueDot Impact</strong><p>AI Safety Initiative at CMU-Africa, and BlueDot's Future of AI course.</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="capabilities" data-sec aria-labelledby="cap-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="tech"><b>&sect;04</b> &middot; capabilities</p>
+        <h2 id="cap-title">What I'm <em>good at.</em></h2>
+      </div>
+      <div class="caps">
+        <div>
+          <div class="skillset">
+            <div><h3>AI &amp; data</h3><ul class="chips"><li>Python</li><li>SQL</li><li>NLP</li><li>AI evaluation</li><li>RAG &amp; agents</li><li>LangChain</li><li>LangGraph</li><li>PySpark</li><li>Pandas</li><li>Power BI</li></ul></div>
+            <div><h3>Research &amp; product</h3><ul class="chips"><li>Human-AI interaction</li><li>Mixed methods</li><li>Literature synthesis</li><li>User interviews</li><li>PostHog</li></ul></div>
+            <div><h3>Engineering</h3><ul class="chips"><li>TypeScript</li><li>React</li><li>Next.js</li><li>Node.js</li><li>PHP</li><li>Docker</li><li>IPFS</li></ul></div>
+          </div>
+          <ul class="artifacts">
+            <li><h3>Field-Note Copilot <span class="new">latest</span></h3><span class="when">2026</span><p>A multi-agent system for the Agentic AI course that turns extension officers' messy field notes (English, Kiswahili, Kinyarwanda) into structured events, checks each one against weather, NDVI and soil data, and reports likely causes. I owned the Cross-Check agent and data layer: rule-based verdicts that never invent numbers, 22 of 22 on the gold check.</p></li>
+            <li><h3><a class="link" href="https://github.com/SKitavi/sautiNet" target="_blank" rel="noopener">SautiNet</a></h3><span class="when">2026</span><p>Distributed NLP tracking public sentiment in English, Swahili and Sheng.</p></li>
+            <li><h3><a class="link" href="https://github.com/SKitavi/Smarthive-ai" target="_blank" rel="noopener">SmartHive AI</a></h3><span class="when">2024</span><p>ML customer segmentation; 1st runner-up, Kenya Inter-University Hackathon.</p></li>
+            <li><h3><a class="link" href="https://github.com/SKitavi/Wiz-ai" target="_blank" rel="noopener">WizAI</a> &middot; Reqon</h3><span class="when">2025&ndash;26</span><p>An agent-based planner built in a week; a requisition system with approvals and audit logs.</p></li>
+          </ul>
+        </div>
+        <div class="context">
+          <p class="tech">special_feature &middot; context_window</p>
+          <h3>An unusually long context window.</h3>
+          <p>Translation: I switch contexts well. At VettedAI, one week could hold all of this without dropping a thread:</p>
+          <div class="meter">
+            <div>AI evaluation<span class="bar"><i style="--w: 88%"></i></span></div>
+            <div>Analytics<span class="bar"><i style="--w: 74%"></i></span></div>
+            <div>User interviews<span class="bar"><i style="--w: 66%"></i></span></div>
+            <div>Roadmap<span class="bar"><i style="--w: 80%"></i></span></div>
+            <div>Panel moderation<span class="bar"><i style="--w: 58%"></i></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="deploy" data-sec aria-labelledby="dep-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="tech"><b>&sect;05</b> &middot; deployments</p>
+        <h2 id="dep-title">Where I've been <em>deployed.</em></h2>
+      </div>
+      <div class="deploys">
+        <article class="dep dep-wide"><div class="top"><span class="tag r">research</span><span class="when">2026</span></div><h3>Researcher, CMU-Africa</h3>
+          <ol class="projects">
+            <li><span class="tech">project_01</span><b>Trust calibration in breast cancer screening AI</b><p>Auditing AI used in breast cancer screening in Rwanda, and how much people should rely on it in low-resource settings.</p></li>
+            <li><span class="tech">project_02 &middot; AI4HR</span><b>Can LLMs read the mental health of the people talking to them?</b><p>Testing how accurately LLMs understand users' mental health. In progress.</p></li>
+          </ol>
+        </article>
+        <article class="dep"><div class="top"><span class="tag r">safety</span><span class="when">2026</span></div><h3>Member, ASICA</h3><p>AI Safety Initiative at CMU-Africa. Notes coming soon on <a class="link" href="https://medium.com/@sharonkmwikali" target="_blank" rel="noopener">Medium</a>.</p></article>
+        <article class="dep"><div class="top"><span class="tag i">industry</span><span class="when">2026</span></div><h3>Data PM / Product Analyst, VettedAI</h3><p>Benchmarked AI outputs against expert human assessments and took ~100 tickets from research to release.</p></article>
+        <article class="dep"><div class="top"><span class="tag i">industry</span><span class="when">2025</span></div><h3>IT Intern, Isuzu East Africa</h3><p>Formerly GM East Africa. Led a requisition tool that cut processing time by 40% for 300+ users.</p></article>
+        <article class="dep"><div class="top"><span class="tag c">teaching</span><span class="when">2025</span></div><h3>University Lead &amp; Table Trainer, Avalanche Team1 Kenya</h3><p>Onboarded and trained student developers at hackathons and campus events.</p></article>
+        <article class="dep"><div class="top"><span class="tag l">leadership</span><span class="when">2024/25</span></div><h3>Campus Director, Hult Prize CUEA</h3><p>Ran the full on-campus programme: 10+ startup workshops in four months.</p></article>
+        <article class="dep"><div class="top"><span class="tag i">founder</span><span class="when">2025</span></div><h3>Co-founder, AvaCertify</h3><p>Certificate verification on Avalanche. I owned IPFS storage and data integrity.</p></article>
+        <article class="dep"><div class="top"><span class="tag s">public speaking</span><span class="when">2027</span></div><h3>President-Elect, Techy Talkers Toastmasters</h3><p>Elected to lead the club from 2027, after joining to train public speaking on purpose.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="speaking" data-sec aria-labelledby="speak-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="tech"><b>&sect;06</b> &middot; voice_output</p>
+        <h2 id="speak-title">On the <em>mic.</em></h2>
+        <p class="plain">Panels I've spoken on and conversations I've moderated. Invite me to yours.</p>
+      </div>
+      <ol class="tracks">
+        <li class="track feature"><span class="num">01</span><div><h3>Team demos &amp; showcase, Global Entrepreneurship Week</h3><p class="sub">Most recent</p></div><span class="wave" data-wave aria-hidden="true"></span><span class="role">moderator</span></li>
+        <li class="track"><span class="num">02</span><div><h3>OpenAI panel, with the Africa Innovators Society</h3><p class="sub">Member of the society</p></div><span class="wave" data-wave aria-hidden="true"></span><span class="role">moderator</span></li>
+        <li class="track"><span class="num">03</span><div><h3>Recruiters Ring panels</h3><p class="sub">Sold-out conversations with East African hiring leaders</p></div><span class="wave" data-wave aria-hidden="true"></span><span class="role">moderator</span></li>
+        <li class="track"><span class="num">04</span><div><h3>Women Connect, Avalanche Team1</h3><p class="sub">Women building and speaking up in Web3</p></div><span class="wave" data-wave aria-hidden="true"></span><span class="role">panelist</span></li>
+      </ol>
+      <p style="margin-top:22px"><a class="link" href="#contact">Invite me to speak or moderate &rarr;</a></p>
+    </div>
+  </section>
+
+  <section id="behaviours" data-sec aria-labelledby="beh-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="tech"><b>&sect;07</b> &middot; known_behaviours &amp; alignment</p>
+        <h2 id="beh-title">How I work, and <em>what I&rsquo;m aligned to.</em></h2>
+      </div>
+      <div class="character">
+      <div class="col">
+        <p class="tech">alignment</p>
+        <div class="values">
+          <div class="value"><h3>Integrity</h3><p>I say what I know, flag what I don't, and do what I said I would.</p></div>
+          <div class="value"><h3>Freedom to explore</h3><p>Curiosity across fields is how I learn new tools fast and bring fresh ideas.</p></div>
+          <div class="value"><h3>Impact</h3><p>Success that opens doors for others, especially young women in tech.</p></div>
+        </div>
+      </div>
+      <div class="col">
+      <p class="tech">known_behaviours &middot; honestly reported</p>
+      <ul class="log">
+        <li><p class="tech">behaviour_01 &middot; adaptability</p><h3>Learns new tools by building with them.</h3><p>Web3, game development and automation were all picked up hands-on, so an unfamiliar stack slows me down for days, not weeks.</p></li>
+        <li><p class="tech">behaviour_02 &middot; focus</p><h3>Holds several projects in memory at once.</h3><p>And enjoys it. Useful anywhere priorities shift daily.</p></li>
+        <li><p class="tech">behaviour_03 &middot; growth</p><h3>Trains her weak spots on purpose.</h3><p>Joined Toastmasters to master public speaking, and is now the club's president-elect.</p></li>
+        <li><p class="tech">behaviour_04 &middot; listening</p><h3>Asks one good question before five quick answers.</h3><p>The habit behind good research, good moderation and good products.</p></li>
+      </ul>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" data-sec aria-labelledby="contact-title">
+    <div class="wrap">
+      <p class="tech"><b>&sect;08</b> &middot; query_the_model</p>
+      <h2 id="contact-title">Let's build something <em>trustworthy.</em></h2>
+      <div class="prompt-line">
+        <span class="gt" aria-hidden="true">&gt;</span>
+        <span class="email">sharonkmwikali@gmail.com</span>
+        <button class="copy" type="button" data-copy="sharonkmwikali@gmail.com">Copy</button>
+      </div>
+      <nav class="profiles" aria-label="Profiles">
+        <a href="https://www.linkedin.com/in/sharonkitavi/" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+        <a href="https://github.com/SKitavi" target="_blank" rel="noopener">GitHub &nearr;</a>
+        <a href="https://medium.com/@sharonkmwikali" target="_blank" rel="noopener">Medium &nearr;</a>
+        <a href="assets/Sharon_Kitavi_CV.pdf" target="_blank" rel="noopener">CV (PDF) &nearr;</a>
+      </nav>
+      <p class="cite">Cite as: Kitavi, S. M. (2026). Model card for a human. Kigali, Rwanda.</p>
+    </div>
+  </section>
+</main>
+<footer class="foot"><div class="wrap">Last evaluated November 2026 &middot; &copy; Sharon Mwikali Kitavi</div></footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var css = function (n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); };
+
+  /* Live Kigali clock */
+  var clock = document.getElementById("clock");
+  function tick() { try { clock.textContent = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Kigali" }).format(new Date()) + " CAT"; } catch (e) {} }
+  tick(); setInterval(tick, 30000);
+
+  /* Evidence switch */
+  var sw = document.getElementById("evSwitch");
+  var swLabel = sw.querySelector(".sw-label");
+  /* Rubber stamps on each sticky note, worded by evidence strength */
+  document.querySelectorAll(".sticky").forEach(function (n, i) {
+    var pip = n.querySelector(".ev .pip"); if (!pip) return;
+    var kind = pip.classList.contains("strong") ? "strong" : pip.classList.contains("medium") ? "medium" : "weak";
+    var s = document.createElement("span");
+    s.className = "stamp " + kind; s.setAttribute("aria-hidden", "true");
+    s.textContent = kind === "strong" ? "verified" : kind === "medium" ? "public" : "on request";
+    s.style.setProperty("--i", i); n.appendChild(s);
+  });
+  document.querySelectorAll(".ev").forEach(function (e, i) { e.style.setProperty("--i", i); });
+  var scan = document.createElement("div"); scan.className = "scan"; scan.setAttribute("aria-hidden", "true"); document.body.appendChild(scan);
+  function setEv(on, animate) {
+    document.body.classList.toggle("show-ev", on);
+    sw.setAttribute("aria-pressed", on);
+    swLabel.textContent = on ? "Evidence on" : "Show evidence";
+    if (on && animate && !reduce) {
+      document.body.classList.remove("ev-anim"); scan.classList.remove("run");
+      void scan.offsetWidth;
+      document.body.classList.add("ev-anim"); scan.classList.add("run");
+      setTimeout(function () { scan.classList.remove("run"); }, 1300);
+    }
+    try { localStorage.setItem("sk-evidence", on ? "1" : "0"); } catch (e) {}
+  }
+  sw.addEventListener("click", function () { setEv(sw.getAttribute("aria-pressed") !== "true", true); });
+  try { if (localStorage.getItem("sk-evidence") === "1") setEv(true); } catch (e) {}
+
+  /* Ask the model: pre-written answers, streamed word by word */
+  var answers = [
+    "An AI engineer and researcher who builds data and AI systems and studies when people should trust them, now doing an MS in Engineering AI at Carnegie Mellon University Africa.",
+    "Trust calibration: helping people rely on AI exactly as much as it deserves. Right now that means auditing AI used in breast cancer screening in Rwanda, and AI4HR: testing how well LLMs read the mental health of the people talking to them. Alongside that, AI safety work with ASICA, the AI Safety Initiative at CMU-Africa.",
+    "About 100 product tickets at VettedAI, taken from user research to release. A tool that made Isuzu East Africa's staff requisitions 40% faster for 300+ people. A distributed NLP pipeline that reads English, Swahili and Sheng. And a startup she co-founded that raised $3K and placed at the African Blockchain Championship.",
+    "She can hold evaluation experiments, analytics, user interviews and a roadmap in the same week without dropping a thread. She tests AI against expert human judgement, explains technical ideas plainly, and leads calmly.",
+    "She picks up new tools by building with them, moderates panels from Recruiters Ring to an OpenAI session with the Africa Innovators Society, and is president-elect of Techy Talkers Toastmasters for 2027. Calm, curious, and good at bringing people along."
+  ];
+  var prompts = document.querySelectorAll(".prompt"), qEl = document.getElementById("chatQ"), aEl = document.getElementById("chatA"), timer = null;
+  function ask(i, btn) {
+    prompts.forEach(function (p) { p.setAttribute("aria-pressed", p === btn); });
+    qEl.textContent = btn.textContent;
+    clearInterval(timer);
+    if (reduce) { aEl.textContent = answers[i]; return; }
+    var words = answers[i].split(" "), n = 0; aEl.textContent = "";
+    timer = setInterval(function () { n++; aEl.textContent = words.slice(0, n).join(" "); if (n >= words.length) clearInterval(timer); }, 38);
+  }
+  prompts.forEach(function (p) { p.addEventListener("click", function () { ask(+p.getAttribute("data-q"), p); }); });
+
+  /* Waveforms for the speaking tracks (fixed shapes, seeded per track) */
+  document.querySelectorAll("[data-wave]").forEach(function (w, t) {
+    var seed = t * 7 + 3;
+    for (var i = 0; i < 28; i++) {
+      seed = (seed * 9301 + 49297) % 233280;
+      var h = 20 + Math.round((seed / 233280) * 80);
+      var bar = document.createElement("i"); bar.style.setProperty("--h", h + "%"); w.appendChild(bar);
+    }
+  });
+
+  /* Reliability diagram in dots */
+  var cv = document.getElementById("reliability"), ctx = cv.getContext("2d"), readout = document.getElementById("readout");
+  var acc = [0.04, 0.12, 0.21, 0.3, 0.41, 0.5, 0.58, 0.65, 0.73, 0.82];
+  var size = 0, hover = -1, grow = reduce ? 1 : 0;
+  function resize() { var dpr = window.devicePixelRatio || 1; size = cv.clientWidth; cv.width = size * dpr; cv.height = size * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  function draw() {
+    var pad = 30, w = size - pad - 6, x0 = pad, y0 = size - pad;
+    ctx.clearRect(0, 0, size, size);
+    ctx.strokeStyle = css("--line"); ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(x0, 6); ctx.lineTo(x0, y0); ctx.lineTo(x0 + w, y0); ctx.stroke();
+    ctx.fillStyle = css("--soft"); ctx.font = "11px " + css("--mono"); ctx.textAlign = "center";
+    ctx.fillText("how sure it says it is", x0 + w / 2, size - 8);
+    ctx.save(); ctx.translate(11, y0 - w / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("how often it's right", 0, 0); ctx.restore();
+    var bins = acc.length, bw = w / bins, r = Math.max(2, bw * 0.14), step = r * 2.5, cols = [css("--lilac"), css("--blush"), css("--rose")];
+    for (var b = 0; b < bins; b++) {
+      var cx = x0 + bw * (b + 0.5), h = w * acc[b] * grow, n = Math.max(1, Math.floor(h / step)), on = b === hover;
+      for (var k = 0; k < n; k++) for (var c = -1; c <= 1; c++) {
+        ctx.beginPath(); ctx.arc(cx + c * step, y0 - step / 2 - k * step, r, 0, Math.PI * 2);
+        ctx.fillStyle = on ? css("--violet") : cols[c + 1]; ctx.fill();
+      }
+      var ideal = w * ((b + 0.5) / bins);
+      ctx.beginPath(); ctx.arc(cx, y0 - ideal, r * 1.05, 0, Math.PI * 2); ctx.strokeStyle = css("--violet"); ctx.lineWidth = 1.4; ctx.stroke();
+    }
+  }
+  resize(); draw();
+  if ("ResizeObserver" in window) new ResizeObserver(function () { resize(); draw(); }).observe(cv);
+  if (!reduce) { var t0 = performance.now(); (function anim(now) { var p = Math.min(1, (now - t0) / 1400); grow = 1 - Math.pow(1 - p, 3); draw(); if (p < 1) requestAnimationFrame(anim); })(t0); }
+  cv.addEventListener("pointermove", function (e) {
+    var rect = cv.getBoundingClientRect(), pad = 30, w = size - pad - 6, b = Math.floor((e.clientX - rect.left - pad) / (w / acc.length));
+    if (b < 0 || b >= acc.length) { hover = -1; readout.hidden = true; draw(); return; }
+    hover = b; readout.hidden = false;
+    readout.textContent = "says " + Math.round((b + 0.5) / acc.length * 100) + "% sure · right " + Math.round(acc[b] * 100) + "%";
+    draw();
+  });
+  cv.addEventListener("pointerleave", function () { hover = -1; readout.hidden = true; draw(); });
+
+  /* Contents drawer: open from the strip button or edge tab, highlight the section in view */
+  var toc = document.getElementById("toc"), scrim = document.getElementById("scrim"), tocBtn = document.getElementById("tocBtn");
+  var tocCur = document.getElementById("tocCur"), tabCur = document.getElementById("tabCur");
+  var tocLinks = Array.prototype.slice.call(toc.querySelectorAll("a"));
+  var secs = Array.prototype.slice.call(document.querySelectorAll("[data-sec]"));
+  /* Make the drawer discoverable: the button pings on load, and a hint appears once the reader is a screen or so in */
+  var nudge = document.getElementById("nudge"), usedToc = false, nudged = false;
+  function hideNudge() { nudge.classList.remove("on"); tocBtn.classList.remove("ping"); }
+  setTimeout(function () { if (!usedToc) tocBtn.classList.add("ping"); }, 1400);
+  window.addEventListener("scroll", function () {
+    if (nudged || usedToc || window.scrollY < window.innerHeight * 1.1) return;
+    nudged = true; nudge.classList.add("on"); tocBtn.classList.remove("ping"); void tocBtn.offsetWidth; tocBtn.classList.add("ping");
+    setTimeout(hideNudge, 6500);
+  }, { passive: true });
+  function openToc(on) {
+    if (on) { usedToc = true; hideNudge(); }
+    toc.classList.toggle("open", on); scrim.classList.toggle("on", on);
+    if (on) toc.removeAttribute("inert"); else toc.setAttribute("inert", "");
+    tocBtn.setAttribute("aria-expanded", on);
+    if (on) { var a = toc.querySelector("a.on") || tocLinks[0]; a.focus({ preventScroll: true }); }
+  }
+  document.querySelectorAll("[data-toc-open]").forEach(function (b) { b.addEventListener("click", function () { openToc(!toc.classList.contains("open")); }); });
+  document.getElementById("tocClose").addEventListener("click", function () { openToc(false); tocBtn.focus(); });
+  scrim.addEventListener("click", function () { openToc(false); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && toc.classList.contains("open")) { openToc(false); tocBtn.focus(); } });
+  tocLinks.forEach(function (a) { a.addEventListener("click", function () { openToc(false); }); });
+  function setActive(id) {
+    tocLinks.forEach(function (a) {
+      var on = a.getAttribute("href") === "#" + id;
+      a.classList.toggle("on", on);
+      if (on) { a.setAttribute("aria-current", "true"); tocCur.textContent = a.querySelector(".n").textContent + " " + a.querySelector("b").textContent; tabCur.textContent = a.querySelector(".n").textContent; }
+      else a.removeAttribute("aria-current");
+    });
+  }
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) { entries.forEach(function (en) { if (en.isIntersecting) setActive(en.target.id); }); }, { rootMargin: "-45% 0px -50% 0px" });
+    secs.forEach(function (s) { io.observe(s); });
+  }
+  var ringPct = document.getElementById("ringPct");
+  function progress() {
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    document.documentElement.style.setProperty("--p", p.toFixed(4));
+    ringPct.textContent = Math.round(p * 100) + "%";
+  }
+  window.addEventListener("scroll", progress, { passive: true }); progress();
+
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var done = function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy"; }, 1800); };
+      var fallback = function () { var r = document.createRange(); r.selectNodeContents(document.querySelector(".email")); var s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; };
+      try { navigator.clipboard.writeText(btn.getAttribute("data-copy")).then(done, fallback); } catch (e) { fallback(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
