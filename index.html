@@ -353,9 +353,9 @@ section { padding-block: clamp(36px, 5vw, 60px); scroll-margin-top: 40px; }
 .skillset { display: grid; gap: 18px; }
 .skillset h3 { font-size: 1rem; margin-bottom: 8px; }
 .chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
-.chips li { font-size: .88rem; background: var(--lavender); border-radius: 999px; padding: 5px 12px; }
-.skillset > div:nth-child(2) .chips li { background: var(--blush); }
-.skillset > div:nth-child(3) .chips li { background: var(--butter); }
+.chips li { font-size: .86rem; background: #EFEBEF; color: var(--ink); border-radius: 999px; padding: 5px 11px; }
+.skillset h3 { display: flex; align-items: baseline; gap: 8px; }
+.skillset h3 small { font: 500 .7rem/1 var(--mono); color: var(--violet); letter-spacing: .02em; }
 .context { background: var(--paper); border-radius: 26px; padding: 26px; display: grid; gap: 14px; box-shadow: 0 20px 50px -34px rgba(106,79,196,.5); }
 .context h3 { font-size: 1.5rem; }
 .context p { color: var(--soft); }
@@ -374,12 +374,12 @@ section { padding-block: clamp(36px, 5vw, 60px); scroll-margin-top: 40px; }
 /* Behaviours & alignment: values on one side, the behaviour log on the other */
 .character { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
 .character .col { display: grid; gap: 12px; }
-.values { display: grid; gap: 12px; }
-.value { border-radius: 22px; padding: 18px 22px; display: grid; gap: 4px; }
-.value:nth-child(1) { background: var(--lilac); } .value:nth-child(2) { background: var(--blush); } .value:nth-child(3) { background: var(--ink); color: var(--cream); }
-.value:nth-child(3) p { color: #CBBFDB; }
-.value h3 { font-size: 1.35rem; }
-.value p { color: var(--soft); font-size: .93rem; }
+.aligned { list-style: none; margin: 0; padding: 4px 22px; background: var(--paper); border-radius: 20px; box-shadow: 0 12px 30px -26px rgba(42,27,56,.5); }
+.aligned li { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 2px 10px; padding: 14px 0; border-bottom: 1px dashed var(--line); }
+.aligned li:last-child { border-bottom: 0; }
+.aligned .w { grid-row: span 2; font: 500 .74rem/1.9 var(--mono); color: var(--violet); }
+.aligned h3 { font-size: 1.1rem; }
+.aligned p { color: var(--soft); font-size: .92rem; }
 .log { list-style: none; margin: 0; padding: 0; display: grid; }
 .log li { display: grid; gap: 4px; padding: 14px 0 14px 18px; border-bottom: 1px solid var(--line); position: relative; }
 .log li::before { content: ""; position: absolute; left: 0; top: 18px; bottom: 18px; width: 3px; border-radius: 3px; background: var(--c, var(--lilac)); }
@@ -392,12 +392,17 @@ section { padding-block: clamp(36px, 5vw, 60px); scroll-margin-top: 40px; }
 .contact { background: var(--ink); color: var(--cream); border-radius: clamp(24px, 4vw, 40px) clamp(24px, 4vw, 40px) 0 0; margin-inline: clamp(8px, 2vw, 24px); }
 .contact .tech { color: #B9A8D6; }
 .contact .tech b { color: var(--rose); }
-.contact h2 { font-size: clamp(2.6rem, 8vw, 6rem); line-height: .92; letter-spacing: -0.045em; font-weight: 700; }
+.contact h2 { font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: 1; letter-spacing: -0.045em; font-weight: 700; }
 .contact h2 em { font-style: normal; color: var(--rose); }
 .prompt-line { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 28px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); border-radius: 18px; padding: 16px 18px; }
 .prompt-line .gt { font: 500 1rem/1 var(--mono); color: var(--rose); }
 .email { font: 600 clamp(1.05rem, 2.6vw, 1.5rem)/1.3 var(--head); user-select: all; overflow-wrap: anywhere; flex: 1; min-width: 0; }
 .copy { font: 600 .85rem/1 var(--sans); background: var(--lilac); color: var(--ink); border: 0; border-radius: 999px; padding: 10px 16px; cursor: pointer; }
+.compose { font: 600 .85rem/1 var(--sans); background: var(--rose); color: var(--ink); border-radius: 999px; padding: 10px 16px; text-decoration: none; white-space: nowrap; }
+.compose:hover, .compose:focus-visible { background: var(--cream); }
+.prompt-line .alt { flex-basis: 100%; font-size: .82rem; color: #B9A8D6; }
+.prompt-line .alt a { color: var(--cream); }
+@media (max-width: 600px) { .prompt-line .email { flex-basis: calc(100% - 40px); } }
 .contact .profiles { margin-top: 20px; }
 .contact .profiles a { color: #CBBFDB; }
 .contact .profiles a:hover { color: var(--cream); }
@@ -410,7 +415,7 @@ section { padding-block: clamp(36px, 5vw, 60px); scroll-margin-top: 40px; }
   .hero-copy > :nth-child(2) { animation-delay: .06s; } .hero-copy > :nth-child(3) { animation-delay: .12s; } .hero-copy > :nth-child(n+4) { animation-delay: .18s; }
   @keyframes rise { from { opacity: .2; transform: translateY(10px); } to { opacity: 1; transform: none; } }
   @supports (animation-timeline: view()) {
-    .sec-head, .dep, .path > li, .value, .track, .context {
+    .sec-head, .dep, .path > li, .aligned, .track, .context {
       animation: settle linear both; animation-timeline: view(); animation-range: entry 0% entry 50%;
     }
     @keyframes settle { from { opacity: .2; translate: 0 22px; } to { opacity: 1; translate: 0 0; } }
@@ -443,7 +448,7 @@ section { padding-block: clamp(36px, 5vw, 60px); scroll-margin-top: 40px; }
     <li><a href="#deploy"><span class="n">04</span><b>Where I&rsquo;ve been deployed</b><small>deployments</small></a></li>
     <li><a href="#capabilities"><span class="n">05</span><b>What I&rsquo;m good at</b><small>capabilities</small></a></li>
     <li><a href="#speaking"><span class="n">06</span><b>On the mic</b><small>voice_output</small></a></li>
-    <li><a href="#behaviours"><span class="n">07</span><b>How I work &amp; what I&rsquo;m aligned to</b><small>behaviours &middot; alignment</small></a></li>
+    <li><a href="#behaviours"><span class="n">07</span><b>What I&rsquo;m aligned to</b><small>behaviours &middot; alignment</small></a></li>
     <li><a href="#contact"><span class="n">08</span><b>Get in touch</b><small>query_the_model</small></a></li>
   </ol>
   <div class="legend-box" aria-label="Evidence strength key">
@@ -601,9 +606,10 @@ section { padding-block: clamp(36px, 5vw, 60px); scroll-margin-top: 40px; }
       <div class="caps">
         <div>
           <div class="skillset">
-            <div><h3>AI &amp; data</h3><ul class="chips"><li>Python</li><li>SQL</li><li>NLP</li><li>AI evaluation</li><li>RAG &amp; agents</li><li>LangChain</li><li>LangGraph</li><li>PySpark</li><li>Pandas</li><li>Power BI</li></ul></div>
-            <div><h3>Research &amp; product</h3><ul class="chips"><li>Human-AI interaction</li><li>Mixed methods</li><li>Literature synthesis</li><li>User interviews</li><li>PostHog</li></ul></div>
-            <div><h3>Engineering</h3><ul class="chips"><li>TypeScript</li><li>React</li><li>Next.js</li><li>Node.js</li><li>PHP</li><li>Docker</li><li>IPFS</li></ul></div>
+            <div><h3>AI &amp; machine learning <small>model</small></h3><ul class="chips"><li>Python</li><li>NLP</li><li>LLM agents</li><li>LangChain</li><li>LangGraph</li><li>ReAct</li><li>RAG</li><li>n8n</li><li>AI evaluation</li><li>Hugging Face Transformers</li><li>PyTorch</li><li>XGBoost</li><li>SHAP explainability</li><li>OpenAI API</li></ul></div>
+            <div><h3>Data <small>pipeline</small></h3><ul class="chips"><li>SQL</li><li>Pandas</li><li>NumPy</li><li>PySpark</li><li>Apache Kafka</li><li>PostgreSQL</li><li>TimescaleDB</li><li>Redis</li><li>SQLite</li><li>MySQL</li><li>Power BI</li><li>PostHog</li><li>Plotly</li><li>Streamlit</li></ul></div>
+            <div><h3>Engineering <small>stack</small></h3><ul class="chips"><li>FastAPI</li><li>TypeScript</li><li>JavaScript</li><li>React</li><li>Next.js</li><li>Node.js</li><li>PHP</li><li>Java</li><li>Scala</li><li>Docker</li><li>Git</li><li>Solidity</li><li>Avalanche</li><li>IPFS</li><li>Firebase</li><li>Power Apps</li><li>Power Automate</li></ul></div>
+            <div><h3>Research &amp; product <small>interface</small></h3><ul class="chips"><li>Human-AI interaction</li><li>Mixed methods</li><li>Literature synthesis</li><li>User interviews</li><li>Product analytics</li><li>Roadmapping</li><li>Figma</li></ul></div>
           </div>
           <ul class="artifacts">
             <li><h3>Field-Note Copilot <span class="new">latest</span></h3><span class="when">2026</span><p>A multi-agent system for the Agentic AI course that turns extension officers' messy field notes (English, Kiswahili, Kinyarwanda) into structured events, checks each one against weather, NDVI and soil data, and reports likely causes. I owned the Cross-Check agent and data layer: rule-based verdicts that never invent numbers, 22 of 22 on the gold check.</p></li>
@@ -649,16 +655,16 @@ section { padding-block: clamp(36px, 5vw, 60px); scroll-margin-top: 40px; }
     <div class="wrap">
       <div class="sec-head">
         <p class="tech"><b>&sect;07</b> &middot; known_behaviours &amp; alignment</p>
-        <h2 id="beh-title">How I work, and <em>what I&rsquo;m aligned to.</em></h2>
+        <h2 id="beh-title">What I&rsquo;m <em>aligned to.</em></h2>
       </div>
       <div class="character">
       <div class="col">
-        <p class="tech">alignment</p>
-        <div class="values">
-          <div class="value"><h3>Integrity</h3><p>I say what I know, flag what I don't, and do what I said I would.</p></div>
-          <div class="value"><h3>Freedom to explore</h3><p>Curiosity across fields is how I learn new tools fast and bring fresh ideas.</p></div>
-          <div class="value"><h3>Impact</h3><p>Success that opens doors for others, especially young women in tech.</p></div>
-        </div>
+        <p class="tech">alignment &middot; core_objectives</p>
+        <ul class="aligned">
+          <li><span class="w">01</span><h3>Integrity</h3><p>I say what I know, flag what I don't, and do what I said I would.</p></li>
+          <li><span class="w">02</span><h3>Freedom to explore</h3><p>Curiosity across fields is how I learn new tools fast and bring fresh ideas.</p></li>
+          <li><span class="w">03</span><h3>Impact</h3><p>Success that opens doors for others, especially young women in tech.</p></li>
+        </ul>
       </div>
       <div class="col">
       <p class="tech">known_behaviours &middot; honestly reported</p>
@@ -681,6 +687,8 @@ section { padding-block: clamp(36px, 5vw, 60px); scroll-margin-top: 40px; }
         <span class="gt" aria-hidden="true">&gt;</span>
         <span class="email">sharonkmwikali@gmail.com</span>
         <button class="copy" type="button" data-copy="sharonkmwikali@gmail.com">Copy</button>
+        <a class="compose" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=sharonkmwikali@gmail.com&amp;su=Hello%20Sharon" target="_blank" rel="noopener">Write in Gmail &nearr;</a>
+        <span class="alt">Not on Gmail? <a href="mailto:sharonkmwikali@gmail.com?subject=Hello%20Sharon">Open your mail app</a></span>
       </div>
       <nav class="profiles" aria-label="Profiles">
         <a href="https://www.linkedin.com/in/sharonkitavi/" target="_blank" rel="noopener">LinkedIn &nearr;</a>
