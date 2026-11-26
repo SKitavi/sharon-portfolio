@@ -11,7 +11,7 @@
 <meta property="og:image" content="https://sharonkitavi.cv/assets/sharon-mono.png">
 <link rel="canonical" href="https://sharonkitavi.cv/">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232A1B38'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='28' font-weight='700' text-anchor='middle' fill='%23CDBDF3'%3ESK%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232A1B38'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='28' font-weight='700' text-anchor='middle' fill='%23D2C6EE'%3ESK%3C/text%3E%3C/svg%3E">
 <title>Sharon Kitavi</title>
 <meta name="description" content="Model card for a human: Sharon Kitavi, AI Research Engineer, HCI, AI Safety. MS Engineering AI student at Carnegie Mellon University Africa.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,19 +26,19 @@
 :root {
   --cream: #FFF9F4;
   --paper: #FFFFFF;
-  --ink: #2A1B38;        /* deep plum ink */
-  --soft: #7A6B86;       /* muted plum */
+  --ink: #2A1B38;       /* deep plum ink */
+  --soft: #6E6079;       /* muted plum */
   --line: #EFE4EE;
-  --lilac: #CDBDF3;
-  --lavender: #F1EBFC;
+  --lilac: #D2C6EE;
+  --lavender: #F1ECFA;
   --blush: #F9DCE5;
-  --rose: #E792B0;       /* the pop */
-  --violet: #6A4FC4;     /* links + numbers */
+  --rose: #E792B0;
+  --violet: #5B4A99;       /* links + numbers (softened violet) */
   --butter: #FFF0C9;
   --mint: #DDF0E3;
-  --sage: #7FA48A;       /* evidence: strong */
-  --amber: #D9A25C;      /* evidence: medium */
-  --mist: #C7BACB;       /* evidence: on request */
+  --sage: #7FA48A;
+  --amber: #D9A25C;
+  --mist: #C7BACB;
 
   --head: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --sans: "Figtree", "Segoe UI", system-ui, sans-serif;
@@ -89,7 +89,7 @@ section { padding-block: clamp(36px, 5vw, 60px); scroll-margin-top: 40px; }
 @media (max-width: 640px) { .strip .id { display: none; } }
 @media (max-width: 720px) { .strip .live { display: none; } .strip .in { flex-wrap: nowrap; } }
 @media (max-width: 480px) { .toc-btn .cur { display: none; } }
-@media (prefers-reduced-motion: no-preference) { .toc-btn.ping { animation: btnping 1.3s ease-out 3; } @keyframes btnping { 0% { box-shadow: 3px 3px 0 var(--rose), 0 0 0 0 rgba(106,79,196,.55); } 100% { box-shadow: 3px 3px 0 var(--rose), 0 0 0 14px rgba(106,79,196,0); } } }
+@media (prefers-reduced-motion: no-preference) { .toc-btn.ping { animation: btnping 1.3s ease-out 3; } @keyframes btnping { 0% { box-shadow: 3px 3px 0 var(--rose), 0 0 0 0 rgba(91,74,153,.55); } 100% { box-shadow: 3px 3px 0 var(--rose), 0 0 0 14px rgba(91,74,153,0); } } }
 .nudge { position: absolute; top: calc(100% + 4px); left: clamp(12px, 2.5vw, 28px); z-index: 31; max-width: min(300px, calc(100vw - 32px)); background: var(--ink); color: var(--cream); font: 500 .84rem/1.4 var(--sans); padding: 10px 14px; border-radius: 14px; box-shadow: 0 14px 30px -14px rgba(42,27,56,.6); opacity: 0; transform: translateY(-6px); pointer-events: none; transition: opacity .35s, transform .35s; }
 .nudge::before { content: ""; position: absolute; top: -6px; left: 22px; width: 12px; height: 12px; background: var(--ink); transform: rotate(45deg); border-radius: 2px; }
 .nudge b { color: var(--rose); font-weight: 600; }
@@ -129,25 +129,25 @@ section { padding-block: clamp(36px, 5vw, 60px); scroll-margin-top: 40px; }
 /* Evidence reveal: a scan sweeps the screen, chips pop in, sticky notes get stamped */
 .scan { position: fixed; inset: 0; z-index: 50; pointer-events: none; overflow: hidden; display: none; }
 .scan.run { display: block; }
-.scan::before { content: ""; position: absolute; left: 0; right: 0; top: -140px; height: 140px; background: linear-gradient(180deg, rgba(205,189,243,0), rgba(205,189,243,.35) 70%, rgba(231,146,176,.55)); border-bottom: 2px solid var(--violet); box-shadow: 0 6px 24px rgba(106,79,196,.35); }
+.scan::before { content: ""; position: absolute; left: 0; right: 0; top: -140px; height: 140px; background: linear-gradient(180deg, rgba(210,198,238,0), rgba(210,198,238,.35) 70%, rgba(231,146,176,.55)); border-bottom: 2px solid var(--violet); box-shadow: 0 6px 24px rgba(91,74,153,.35); }
 .scan.run::before { animation: sweep 1.2s cubic-bezier(.45,.05,.35,1) forwards; }
 @keyframes sweep { to { transform: translateY(calc(100vh + 140px)); } }
 .ev-anim .ev { animation: evpop .5s cubic-bezier(.2,1.3,.4,1) both; animation-delay: calc(.35s + var(--i, 0) * .09s); }
 @keyframes evpop { from { opacity: 0; transform: translateY(6px) scale(.9); } to { opacity: 1; transform: none; } }
 .ev-anim .ev .pip { animation: ping .8s ease-out both; animation-delay: calc(.45s + var(--i, 0) * .09s); }
-@keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(106,79,196,.55); } 100% { box-shadow: 0 0 0 9px rgba(106,79,196,0); } }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(91,74,153,.55); } 100% { box-shadow: 0 0 0 9px rgba(91,74,153,0); } }
 .stamp { position: absolute; top: 62px; right: 14px; display: none; font: 600 .66rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; padding: 6px 8px; border: 2px solid currentColor; border-radius: 6px; transform: rotate(-12deg); background: rgba(255,255,255,.45); mix-blend-mode: multiply; }
 .stamp.strong { color: #4E7A5A; } .stamp.medium { color: #A9742F; } .stamp.weak { color: #8C7E91; }
 .show-ev .stamp { display: block; }
 .ev-anim .stamp { animation: stampin .45s cubic-bezier(.2,1.5,.4,1) both; animation-delay: calc(.55s + var(--i, 0) * .12s); }
 @keyframes stampin { 0% { opacity: 0; transform: rotate(-12deg) scale(2.2); } 60% { opacity: 1; transform: rotate(-12deg) scale(.92); } 100% { opacity: 1; transform: rotate(-12deg) scale(1); } }
-.show-ev .sticky { outline: 1.5px dashed rgba(106,79,196,.35); outline-offset: 5px; }
+.show-ev .sticky { outline: 1.5px dashed rgba(91,74,153,.35); outline-offset: 5px; }
 .switch[aria-pressed="true"] .sw-label { color: var(--violet); }
 
 /* Hero */
 .hero { padding-block: clamp(20px, 3.5vw, 44px) clamp(48px, 7vw, 84px); position: relative; overflow: hidden; }
 .hero::before { content: ""; position: absolute; width: 60vw; max-width: 760px; aspect-ratio: 1; right: -12vw; top: -10vw; border-radius: 50%; background: radial-gradient(circle, var(--blush) 0%, rgba(249,220,229,0) 65%); pointer-events: none; }
-.hero::after { content: ""; position: absolute; width: 50vw; max-width: 640px; aspect-ratio: 1; left: -18vw; bottom: -22vw; border-radius: 50%; background: radial-gradient(circle, var(--lavender) 0%, rgba(241,235,252,0) 65%); pointer-events: none; }
+.hero::after { content: ""; position: absolute; width: 50vw; max-width: 640px; aspect-ratio: 1; left: -18vw; bottom: -22vw; border-radius: 50%; background: radial-gradient(circle, var(--lavender) 0%, rgba(241,236,250,0) 65%); pointer-events: none; }
 .hero .wrap { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(28px, 4vw, 56px); align-items: center; }
 .hero-copy { display: grid; gap: 18px; min-width: 0; }
 .id-row { display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap; }
@@ -187,7 +187,7 @@ section { padding-block: clamp(36px, 5vw, 60px); scroll-margin-top: 40px; }
 .profiles a { color: var(--soft); text-decoration: none; }
 .profiles a:hover { color: var(--ink); }
 
-.figure-card { position: relative; background: var(--paper); border-radius: 26px; padding: 18px 18px 16px; box-shadow: 0 30px 60px -30px rgba(106,79,196,.35); transform: rotate(1.2deg); margin: 0; align-self: start; }
+.figure-card { position: relative; background: var(--paper); border-radius: 26px; padding: 18px 18px 16px; box-shadow: 0 30px 60px -30px rgba(91,74,153,.35); transform: rotate(1.2deg); margin: 0; align-self: start; }
 .figure-card .plot { position: relative; aspect-ratio: 1; width: 100%; }
 .figure-card canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: crosshair; }
 .figure-card figcaption { font-size: .82rem; color: var(--soft); line-height: 1.5; margin-top: 8px; }
@@ -232,7 +232,7 @@ section { padding-block: clamp(36px, 5vw, 60px); scroll-margin-top: 40px; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; font: 400 .7rem/1 var(--mono); color: var(--soft); }
 .notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 16px; padding-top: 6px; }
 .sticky { position: relative; padding: 18px 16px 15px; display: grid; gap: 4px; align-content: start; border-radius: 3px 3px 18px 3px; box-shadow: 0 1px 0 rgba(42,27,56,.04), 0 14px 22px -16px rgba(42,27,56,.5); transform: rotate(var(--r, 0deg)); transition: transform .35s ease; }
-.sticky::before { content: ""; position: absolute; top: -9px; left: 50%; width: 64px; height: 18px; transform: translateX(-50%) rotate(var(--tape, -3deg)); background: rgba(205,189,243,.55); border-left: 2px dashed rgba(255,255,255,.6); border-right: 2px dashed rgba(255,255,255,.6); }
+.sticky::before { content: ""; position: absolute; top: -9px; left: 50%; width: 64px; height: 18px; transform: translateX(-50%) rotate(var(--tape, -3deg)); background: rgba(210,198,238,.55); border-left: 2px dashed rgba(255,255,255,.6); border-right: 2px dashed rgba(255,255,255,.6); }
 .sticky:hover { transform: rotate(0deg) translateY(-4px); z-index: 2; }
 .sticky:nth-child(1) { background: var(--butter); --r: -2.2deg; }
 .sticky:nth-child(2) { background: var(--blush); --r: 1.6deg; --tape: 4deg; }
@@ -354,7 +354,7 @@ section { padding-block: clamp(36px, 5vw, 60px); scroll-margin-top: 40px; }
 .chips li { font-size: .86rem; background: #EFEBEF; color: var(--ink); border-radius: 999px; padding: 5px 11px; }
 .skillset h3 { display: flex; align-items: baseline; gap: 8px; }
 .skillset h3 small { font: 500 .7rem/1 var(--mono); color: var(--violet); letter-spacing: .02em; }
-.context { background: var(--paper); border-radius: 26px; padding: 26px; display: grid; gap: 14px; box-shadow: 0 20px 50px -34px rgba(106,79,196,.5); }
+.context { background: var(--paper); border-radius: 26px; padding: 26px; display: grid; gap: 14px; box-shadow: 0 20px 50px -34px rgba(91,74,153,.5); }
 .context h3 { font-size: 1.5rem; }
 .context p { color: var(--soft); }
 .meter { display: grid; gap: 8px; }
@@ -411,12 +411,12 @@ section { padding-block: clamp(36px, 5vw, 60px); scroll-margin-top: 40px; }
 @media (prefers-reduced-motion: no-preference) {
   .hero-copy > * { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
   .hero-copy > :nth-child(2) { animation-delay: .06s; } .hero-copy > :nth-child(3) { animation-delay: .12s; } .hero-copy > :nth-child(n+4) { animation-delay: .18s; }
-  @keyframes rise { from { opacity: .2; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @keyframes rise { from { opacity: .5; transform: translateY(10px); } to { opacity: 1; transform: none; } }
   @supports (animation-timeline: view()) {
     .sec-head, .dep, .path > li, .aligned, .track, .context {
-      animation: settle linear both; animation-timeline: view(); animation-range: entry 0% entry 50%;
+      animation: settle linear both; animation-timeline: view(); animation-range: entry 0% entry 30%;
     }
-    @keyframes settle { from { opacity: .2; translate: 0 22px; } to { opacity: 1; translate: 0 0; } }
+    @keyframes settle { from { opacity: .55; translate: 0 18px; } to { opacity: 1; translate: 0 0; } }
   }
 }
 </style>
@@ -488,10 +488,10 @@ section { padding-block: clamp(36px, 5vw, 60px); scroll-margin-top: 40px; }
       <div class="board" id="eval" aria-labelledby="eval-title">
         <div class="board-head"><div><p class="tech"><b>evaluation_results</b> &middot; measured in the wild</p><h2 id="eval-title">Things I&rsquo;ve done that <em>worked.</em></h2></div><div class="legend" aria-label="Evidence key"><span><i class="pip strong"></i>public &amp; checkable</span><span><i class="pip medium"></i>public profile</span><span><i class="pip weak"></i>on request</span></div></div>
         <div class="notes">
-        <article class="sticky"><p class="tech">research_to_release</p><b>~100</b><h3>Product tickets shipped</h3><p>At VettedAI, from user interviews and analytics to engineering and post-release tracking.</p><span class="ev"><span class="pip weak"></span>Reference on request</span></article>
-        <article class="sticky"><p class="tech">workflow_automation</p><b>40%</b><h3>Faster requisitions</h3><p>A PowerApps tool I led at Isuzu East Africa, used by 300+ staff.</p><span class="ev"><span class="pip weak"></span>Reference on request</span></article>
         <article class="sticky"><p class="tech">multilingual_nlp &middot; hackathons</p><b class="word">Multilingual <span>NLP</span><small>for code-switched English &amp; Swahili</small></b><p>SautiNet reads Kenyan social media in both, even when people switch languages mid-sentence. SmartHive AI and AvaCertify placed at the <strong>Kenya Inter-University AI Hackathon</strong> and the <strong>African Blockchain Championship</strong>.</p><span class="ev"><span class="pip strong"></span><a href="https://github.com/SKitavi/sautiNet" target="_blank" rel="noopener">SautiNet repo &nearr;</a> <a href="https://github.com/SKitavi/Smarthive-ai" target="_blank" rel="noopener">SmartHive repo &nearr;</a></span></article>
         <article class="sticky"><p class="tech">venture_building</p><b class="word">AWS <span>Cloudplexo</span></b><h3>Startup programme, as co-founder</h3><p>AvaCertify, certificate verification on Avalanche, raised early funding and earned a place in the AWS Cloudplexo startup programme.</p><span class="ev"><span class="pip medium"></span><a href="https://www.linkedin.com/in/sharonkitavi/" target="_blank" rel="noopener">LinkedIn &nearr;</a></span></article>
+        <article class="sticky"><p class="tech">research_to_release</p><b>~100</b><h3>Product tickets shipped</h3><p>At VettedAI, from user interviews and analytics to engineering and post-release tracking.</p><span class="ev"><span class="pip weak"></span>Reference on request</span></article>
+        <article class="sticky"><p class="tech">workflow_automation</p><b>40%</b><h3>Faster requisitions</h3><p>A PowerApps tool I led at Isuzu East Africa, used by 300+ staff.</p><span class="ev"><span class="pip weak"></span>Reference on request</span></article>
       </div>
       </div>
     </div>
